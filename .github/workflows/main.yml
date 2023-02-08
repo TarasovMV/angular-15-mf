@@ -42,7 +42,7 @@ jobs:
 
     print:
         runs-on: ubuntu-latest
-        needs: install
+        needs: affected
         steps:
             -   name: Get color
                 run: echo "Affected project is ${{ $AFFECTED }}"
