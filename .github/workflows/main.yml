@@ -28,7 +28,6 @@ jobs:
         needs: install
         outputs:
             affected: ${{ steps.affected.outputs.projects }}
-            vars: ${{ steps.vars.outputs.test }}
         steps:
             -   name: checkout
                 uses: actions/checkout@v3
@@ -42,21 +41,35 @@ jobs:
                     key: node-modules-${{ hashFiles('package-lock.json') }}
             -   name: show
                 run: npx nx print-affected --type=app --select=projects --base=main~1
-            -   name: vars
-                id: vars
-                run: echo "test=world" >> $GITHUB_OUTPUT
             -   name: affected
                 id: affected
                 run: echo "projects=$(npx nx print-affected --type=app --select=projects --base=main~1)" >> $GITHUB_OUTPUT
 
-    print:
-        runs-on: ubuntu-latest
+    shell:
         needs: affected
+        if: ${{ contains("${{needs.affected.outputs.vars}}", "shell") }}
+        runs-on: ubuntu-latest
         steps:
-            -   name: Get affected var
-                run: echo "affected:${{needs.affected.outputs.affected}}"
-            -   name: Check vars
-                run: echo "vars:${{needs.affected.outputs.vars}}"
+            -   name: success
+                run: echo "success"
+
+    mfe1:
+        needs: affected
+        if: ${{ contains("${{needs.affected.outputs.vars}}", "mfe1") }}
+        runs-on: ubuntu-latest
+        steps:
+            -   name: success
+                run: echo "success"
+
+    mfe2:
+        needs: affected
+        if: ${{ contains("${{needs.affected.outputs.vars}}", "mfe2") }}
+        runs-on: ubuntu-latest
+        steps:
+            -   name: success
+                run: echo "success"
+
+
 
 
 
