@@ -43,8 +43,10 @@ jobs:
             -   name: show
                 run: npx nx print-affected --type=app --select=projects --base=main~1
             -   name: vars
+                id: vars
                 run: echo "test=world" >> $GITHUB_OUTPUT
             -   name: affected
+                id: affected
                 run: echo "projects=$(npx nx print-affected --type=app --select=projects --base=main~1)" >> $GITHUB_OUTPUT
 
     print:
