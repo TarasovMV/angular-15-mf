@@ -38,7 +38,7 @@ jobs:
                     path: node_modules
                     key: node-modules-${{ hashFiles('package-lock.json') }}
             -   name: test
-                run: echo "AFFECTED=$(npm run affected:ci)" >> $GITHUB_ENV
+                run: echo "AFFECTED=$(npx nx print-affected --type=app --select=projects --base=main~1)" >> $GITHUB_ENV
 
     print:
         runs-on: ubuntu-latest
