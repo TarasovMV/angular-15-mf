@@ -45,7 +45,7 @@ jobs:
         needs: affected
         steps:
             -   name: Get color
-                run: echo "Affected project is ${{ $AFFECTED }}"
+                run: echo "Affected project is $( $AFFECTED )"
 
 
 
