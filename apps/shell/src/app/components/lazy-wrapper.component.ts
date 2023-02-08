@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	createNgModule,
 	OnDestroy,
@@ -20,6 +21,7 @@ import { Subject, takeUntil } from 'rxjs';
 		</div>
 		<div #vcRef></div>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LazyWrapperComponent implements OnDestroy {
 	@ViewChild('vcRef', { read: ViewContainerRef }) vcRef!: ViewContainerRef;
