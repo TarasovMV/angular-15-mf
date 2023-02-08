@@ -52,9 +52,9 @@ jobs:
         needs: affected
         steps:
             -   name: Get affected var
-                run: echo ${{needs.affected.outputs.affected}}
+                run: echo "affected:${{needs.affected.outputs.affected}}"
             -   name: Check vars
-                run: echo ${{needs.affected.outputs.affected}}
+                run: echo "vars:${{needs.affected.outputs.vars}}"
 
 
 
