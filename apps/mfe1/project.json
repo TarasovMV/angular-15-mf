@@ -1,0 +1,116 @@
+{
+	"name": "mfe1",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "application",
+	"sourceRoot": "apps/mfe1/src",
+	"prefix": "angular15mf",
+	"targets": {
+		"build": {
+			"executor": "@nrwl/angular:webpack-browser",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/apps/mfe1",
+				"index": "apps/mfe1/src/index.html",
+				"main": "apps/mfe1/src/main.ts",
+				"polyfills": ["zone.js"],
+				"tsConfig": "apps/mfe1/tsconfig.app.json",
+				"inlineStyleLanguage": "less",
+				"assets": ["apps/mfe1/src/favicon.ico", "apps/mfe1/src/assets"],
+				"styles": ["apps/mfe1/src/styles.less"],
+				"scripts": [],
+				"customWebpackConfig": {
+					"path": "apps/mfe1/webpack.config.js"
+				}
+			},
+			"configurations": {
+				"production": {
+					"budgets": [
+						{
+							"type": "initial",
+							"maximumWarning": "500kb",
+							"maximumError": "1mb"
+						},
+						{
+							"type": "anyComponentStyle",
+							"maximumWarning": "2kb",
+							"maximumError": "4kb"
+						}
+					],
+					"outputHashing": "all",
+					"customWebpackConfig": {
+						"path": "apps/mfe1/webpack.prod.config.js"
+					}
+				},
+				"development": {
+					"buildOptimizer": false,
+					"optimization": false,
+					"vendorChunk": true,
+					"extractLicenses": false,
+					"sourceMap": true,
+					"namedChunks": true
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"serve": {
+			"executor": "@nrwl/angular:webpack-dev-server",
+			"configurations": {
+				"production": {
+					"browserTarget": "mfe1:build:production"
+				},
+				"development": {
+					"browserTarget": "mfe1:build:development"
+				}
+			},
+			"defaultConfiguration": "development",
+			"options": {
+				"port": 4201,
+				"publicHost": "http://localhost:4201"
+			}
+		},
+		"extract-i18n": {
+			"executor": "@angular-devkit/build-angular:extract-i18n",
+			"options": {
+				"browserTarget": "mfe1:build"
+			}
+		},
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/mfe1/**/*.ts", "apps/mfe1/**/*.html"]
+			}
+		},
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "apps/mfe1/jest.config.ts",
+				"passWithNoTests": true
+			},
+			"configurations": {
+				"ci": {
+					"ci": true,
+					"codeCoverage": true
+				}
+			}
+		},
+		"serve-static": {
+			"executor": "@nrwl/angular:file-server",
+			"defaultConfiguration": "development",
+			"options": {
+				"buildTarget": "mfe1:build",
+				"port": 4201
+			},
+			"configurations": {
+				"development": {
+					"buildTarget": "mfe1:build:development"
+				},
+				"production": {
+					"buildTarget": "mfe1:build:production"
+				}
+			}
+		}
+	},
+	"tags": []
+}
