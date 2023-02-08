@@ -2,7 +2,9 @@
 	"name": "angular15mf",
 	"version": "0.0.0",
 	"license": "MIT",
-	"scripts": {},
+	"scripts": {
+        "affected:ci": "nx print-affected --type=app --select=projects --base=main~1"
+    },
 	"private": true,
 	"dependencies": {
 		"@angular/animations": "~15.1.0",
