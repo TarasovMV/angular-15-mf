@@ -47,7 +47,7 @@ jobs:
 
     shell:
         needs: affected
-        if: ${{ contains("${{needs.affected.outputs.vars}}", "shell") }}
+        if: ${{ contains("${{needs.affected.outputs.affected}}", "shell") }}
         runs-on: ubuntu-latest
         steps:
             -   name: success
@@ -55,7 +55,7 @@ jobs:
 
     mfe1:
         needs: affected
-        if: ${{ contains("${{needs.affected.outputs.vars}}", "mfe1") }}
+        if: ${{ contains("${{needs.affected.outputs.affected}}", "mfe1") }}
         runs-on: ubuntu-latest
         steps:
             -   name: success
@@ -63,7 +63,7 @@ jobs:
 
     mfe2:
         needs: affected
-        if: ${{ contains("${{needs.affected.outputs.vars}}", "mfe2") }}
+        if: ${{ contains("${{needs.affected.outputs.affected}}", "mfe2") }}
         runs-on: ubuntu-latest
         steps:
             -   name: success
