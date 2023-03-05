@@ -1,0 +1,6 @@
+Dockerfile
+.vscode
+.angular
+.dockerignore
+npm-debug.log
+

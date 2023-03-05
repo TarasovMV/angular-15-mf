@@ -1,6 +1,4 @@
-name: mnr-crm ci/cd
-
-
+name: mfe ci/cd
 
 on:
     push:
@@ -48,10 +46,12 @@ jobs:
     shell:
         needs: affected
         if: ${{ contains(needs.affected.outputs.affected, 'shell') }}
-        runs-on: ubuntu-latest
-        steps:
-            -   name: success
-                run: echo "success"
+        uses: ./.github/workflows/app-build.yml
+        with:
+            app-name: 'shell'
+            docker-path: 'apps/shell/Dockerfile'
+            deploy-port: '3000'
+        secrets: inherit
 
     mfe1:
         needs: affected

@@ -1,0 +1,63 @@
+name: Shared workflow build and deploy
+
+on:
+    workflow_call:
+        inputs:
+            app-name:
+                required: true
+                type: string
+            docker-path:
+                required: true
+                type: string
+            deploy-port:
+                required: true
+                type: string
+        secrets:
+            DOCKERHUB_USERNAME:
+                required: true
+            DOCKERHUB_TOKEN:
+                required: true
+            SSH_HOST:
+                required: true
+            SSH_PRIVATE_KEY:
+                required: true
+
+jobs:
+    build-and-push:
+    docs:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: checkout
+                uses: actions/checkout@v3
+            -   name: restore cache
+                id: cache-node-modules
+                uses: actions/cache@v3
+                with:
+                    path: node_modules
+                    key: node-modules-${{ hashFiles('package-lock.json') }}
+            -   name: build
+                run: npm run build:docs
+            -   name: docker login
+                uses: docker/login-action@v2
+                with:
+                    username: ${{ secrets.DOCKERHUB_USERNAME }}
+                    password: ${{ secrets.DOCKERHUB_TOKEN }}
+            -   name: build and push
+                uses: docker/build-push-action@v3
+                with:
+                    context: .
+                    push: true
+                    tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}
+                    platforms: linux/amd64
+                    file: ${{ inputs.docker-path }}
+            -   name: deploy by ssh
+                uses: garygrossgarten/github-action-ssh@release
+                with:
+                    command: |
+#                        docker stop ${{ inputs.app-name }}-container
+#                        docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}:latest
+                        docker pull ${{ inputs.docker-tag }}
+                        docker run -d -p${{ inputs.deploy-port }}:80 --name ${{ inputs.app-name }}-container --rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}
+                    username: root
+                    host: ${{ secrets.SSH_HOST }}
+                    privateKey: ${{ secrets.SSH_PRIVATE_KEY}}

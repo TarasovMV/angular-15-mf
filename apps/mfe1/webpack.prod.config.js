@@ -1,1 +1,1 @@
-import('./webpack.config');
+import('./webpack.config.js');
