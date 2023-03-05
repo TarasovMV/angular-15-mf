@@ -46,7 +46,7 @@ jobs:
     shell:
         needs: affected
         if: ${{ contains(needs.affected.outputs.affected, 'shell') }}
-        uses: ./.github/workflows/app-build.yml
+        uses: ./.github/workflows/app-build-deploy.yml
         with:
             app-name: 'shell'
             docker-path: 'apps/shell/Dockerfile'
