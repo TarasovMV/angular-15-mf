@@ -46,19 +46,17 @@ jobs:
                 with:
                     context: .
                     push: true
-                    tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}
+                    tags: ${{ secrets.DOCKERHUB_USERNAME }}/mf-${{ inputs.app-name }}
                     platforms: linux/amd64
                     file: ${{ inputs.docker-path }}
             -   name: deploy by ssh
                 uses: garygrossgarten/github-action-ssh@release
                 with:
-                    command: |
-                        docker pull ${{ inputs.docker-tag }}
-                        docker run -d -p${{ inputs.deploy-port }}:80 --name ${{ inputs.app-name }}-container --rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}
                     username: root
                     host: ${{ secrets.SSH_HOST }}
                     privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
-
-
-#                        docker stop ${{ inputs.app-name }}-container
-#                        docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}:latest
+                    command: |
+                        docker stop mf-${{ inputs.app-name }}-container
+                        docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/mf-${{ inputs.app-name }}:latest
+                        docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mf-${{ inputs.app-name }}
+                        docker run -d -p${{ inputs.deploy-port }}:80 --name mf-${{ inputs.app-name }}-container --rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}

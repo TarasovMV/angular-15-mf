@@ -56,18 +56,22 @@ jobs:
     mfe1:
         needs: affected
         if: ${{ contains(needs.affected.outputs.affected, 'mfe1') }}
-        runs-on: ubuntu-latest
-        steps:
-            -   name: success
-                run: echo "success"
+        uses: ./.github/workflows/app-build-deploy.yml
+        with:
+            app-name: 'mfe1'
+            docker-path: 'apps/mfe1/Dockerfile'
+            deploy-port: '3001'
+        secrets: inherit
 
     mfe2:
         needs: affected
         if: ${{ contains(needs.affected.outputs.affected, 'mfe2') }}
-        runs-on: ubuntu-latest
-        steps:
-            -   name: success
-                run: echo "success"
+        uses: ./.github/workflows/app-build-deploy.yml
+        with:
+            app-name: 'mfe2'
+            docker-path: 'apps/mfe2/Dockerfile'
+            deploy-port: '3002'
+        secrets: inherit
 
 
 
