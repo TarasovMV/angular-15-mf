@@ -39,13 +39,7 @@
 					"outputHashing": "all",
 					"customWebpackConfig": {
 						"path": "apps/mfe1/webpack.prod.config.js"
-					},
-                    "fileReplacements": [
-                        {
-                            "replace": "apps/shell/src/assets/mf.manifest.json",
-                            "with": "apps/shell/src/assets/mf.manifest.prod.json"
-                        }
-                    ]
+					}
                 },
 				"development": {
 					"buildOptimizer": false,
