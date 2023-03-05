@@ -8,7 +8,8 @@
         },
         ".github/workflows/app-build-deploy.yml": "*",
         ".github/workflows/main.yml": "*",
-        "nx.json": "*"
+        "nx.json": "*",
+        "nginx.conf": "*"
     },
 	"tasksRunnerOptions": {
 		"default": {
