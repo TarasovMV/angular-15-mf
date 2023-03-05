@@ -56,7 +56,8 @@ jobs:
                     host: ${{ secrets.SSH_HOST }}
                     privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
                     command: |
-                        docker stop mf-${{ inputs.app-name }}-container
-                        docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/mf-${{ inputs.app-name }}:latest
                         docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mf-${{ inputs.app-name }}
-                        docker run -d -p${{ inputs.deploy-port }}:80 --name mf-${{ inputs.app-name }}-container --rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}
+                        docker run -d -p${{ inputs.deploy-port }}:80 --name mf-${{ inputs.app-name }}-container --rm ${{ secrets.DOCKERHUB_USERNAME }}/mf-${{ inputs.app-name }}
+
+#    docker stop mf-${{ inputs.app-name }}-container
+#    docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/mf-${{ inputs.app-name }}:latest
