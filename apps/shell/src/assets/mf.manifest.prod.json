@@ -1,12 +1,12 @@
 {
 	"mfe1": {
-		"path": "mfe1/static/remoteEntry.js",
+		"path": "/mfe1/static/remoteEntry.js",
 		"exposed": "./Module",
 		"entity": "RemoteEntryModule",
 		"type": "module"
 	},
 	"mfe2": {
-		"path": "mfe2/static/remoteEntry.js",
+		"path": "/mfe2/static/remoteEntry.js",
 		"exposed": "./Component",
 		"entity": "RemoteEntryComponent",
 		"type": "component"
