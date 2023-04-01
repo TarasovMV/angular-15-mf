@@ -76,7 +76,7 @@ jobs:
     cdn:
         needs: affected
         if: ${{ contains(needs.affected.outputs.affected, 'cdn') }}
-        uses: ./.github/workflows/app-build-deploy.yml
+        uses: ./.github/workflows/cdn-build-deploy.yml
         with:
             app-name: 'cdn'
             docker-path: 'apps/cdn/Dockerfile'
