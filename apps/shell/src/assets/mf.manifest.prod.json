@@ -1,12 +1,12 @@
 {
 	"mfe1": {
-		"path": "http://194.67.204.95:3001/remoteEntry.js",
+		"path": "mfe1/static/remoteEntry.js",
 		"exposed": "./Module",
 		"entity": "RemoteEntryModule",
 		"type": "module"
 	},
 	"mfe2": {
-		"path": "http://194.67.204.95:3002/remoteEntry.js",
+		"path": "mfe2/static/remoteEntry.js",
 		"exposed": "./Component",
 		"entity": "RemoteEntryComponent",
 		"type": "component"
