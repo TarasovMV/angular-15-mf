@@ -73,6 +73,16 @@ jobs:
             deploy-port: '3002'
         secrets: inherit
 
+    cdn:
+        needs: affected
+        if: ${{ contains(needs.affected.outputs.affected, 'cdn') }}
+        uses: ./.github/workflows/app-build-deploy.yml
+        with:
+            app-name: 'cdn'
+            docker-path: 'apps/cdn/Dockerfile'
+            deploy-port: '3333'
+        secrets: inherit
+
 
 
 
