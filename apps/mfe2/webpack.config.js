@@ -1,18 +1,5 @@
-const {
-	withModuleFederationPlugin,
-	shareAll,
-} = require('@angular-architects/module-federation/webpack');
+const webpackConfigurator = require('../../utils/app-webpack.config');
 
-module.exports = withModuleFederationPlugin({
-	name: 'mfe2',
-	exposes: {
-		'./Component': 'apps/mfe2/src/app/remote-entry/entry.component.ts',
-	},
-	shared: {
-		...shareAll({
-			singleton: true,
-			strictVersion: true,
-			requiredVersion: 'auto',
-		}),
-	},
+module.exports = webpackConfigurator('mfe2', {
+	'./Component': 'apps/mfe2/src/app/remote-entry/entry.component.ts',
 });

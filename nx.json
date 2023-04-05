@@ -1,16 +1,16 @@
 {
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
 	"npmScope": "angular15mf",
-    "implicitDependencies": {
-        "package.json": {
-            "dependencies": "*",
-            "devDependencies": "*"
-        },
-        ".github/workflows/app-build-deploy.yml": "*",
-        ".github/workflows/main.yml": "*",
-        "nx.json": "*",
-        "nginx.conf": "*"
-    },
+	"implicitDependencies": {
+		"package.json": {
+			"dependencies": "*",
+			"devDependencies": "*"
+		},
+		".github/workflows/app-build-deploy.yml": "*",
+		".github/workflows/main.yml": "*",
+		"nx.json": "*",
+		"nginx.conf": "*"
+	},
 	"tasksRunnerOptions": {
 		"default": {
 			"runner": "@nrwl/nx-cloud",

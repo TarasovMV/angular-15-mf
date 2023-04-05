@@ -40,7 +40,7 @@
 					"customWebpackConfig": {
 						"path": "apps/mfe1/webpack.prod.config.js"
 					}
-                },
+				},
 				"development": {
 					"buildOptimizer": false,
 					"optimization": false,

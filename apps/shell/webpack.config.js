@@ -1,15 +1,3 @@
-const {
-	withModuleFederationPlugin,
-	shareAll,
-} = require('@angular-architects/module-federation/webpack');
+const webpackConfigurator = require('../../utils/app-webpack.config');
 
-module.exports = withModuleFederationPlugin({
-	name: 'shell',
-	shared: {
-		...shareAll({
-			singleton: true,
-			strictVersion: true,
-			requiredVersion: 'auto',
-		}),
-	},
-});
+module.exports = webpackConfigurator('shell');
