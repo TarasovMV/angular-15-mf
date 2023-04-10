@@ -9,7 +9,7 @@ const config = {
 	title: 'Angular Mfe Docs',
 	tagline: 'Документация по использованию Module Federation в Angular',
 	url: 'https://mf-demo.m-tarasov.com',
-	baseUrl: '/',
+	baseUrl: '/docs/',
 	onBrokenLinks: 'throw',
 	onBrokenMarkdownLinks: 'warn',
 	favicon: 'img/favicon.ico',
