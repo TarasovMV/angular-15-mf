@@ -83,6 +83,16 @@ jobs:
             deploy-port: '3333'
         secrets: inherit
 
+    docs:
+        needs: affected
+        if: ${{ contains(needs.affected.outputs.affected, 'docs') }}
+        uses: ./.github/workflows/app-build-deploy.yml
+        with:
+            app-name: 'docs'
+            docker-path: 'apps/docs/Dockerfile'
+            deploy-port: '4444'
+        secrets: inherit
+
 
 
 
