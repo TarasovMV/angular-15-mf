@@ -48,7 +48,6 @@ APPS.forEach(({ name, port }) => {
 			ws: true,
 			pathRewrite: {
 				[`^/${name}/static`]: '',
-				// '^/mfe1/static': '',
 			},
 		})
 	);

@@ -1,1 +1,111 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    --color-black: rgba(0,0,0,.8);
+    --color-white: #e0e5ec;
+    --radius: .25rem;
+
+    font-family: 'Arial', serif;
+    color: var(--color-black);
+}
+
+h1,h2,h3 {
+    margin: 0;
+}
+
+button {
+    outline: none;
+    width: 130px;
+    height: 40px;
+    padding: 10px 25px;
+    border: 2px solid var(--color-black);
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    border-radius: var(--radius);
+}
+
+.btn-16 {
+    background: var(--color-black);;
+    color: #fff;
+    z-index: 1;
+}
+.btn-16:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    background: #e0e5ec;
+    transition: all 0.3s ease;
+}
+.btn-16:hover {
+    color: var(--color-black);
+}
+.btn-16:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+}
+.btn-16:active {
+    top: 2px;
+}
+
+@sizes: 16;
+@space: 4px;
+
+.generate-space(@direction, @i: 0) when (@i =< @sizes) {
+    .generate-space(@direction, @i + 1);
+
+    &_@{direction}-@{i} {
+        & when (@direction = all) {
+            margin: @space * @i;
+        }
+
+        & when (@direction = top) {
+            margin-top: @space * @i;
+        }
+
+        & when (@direction = bottom) {
+            margin-bottom: @space * @i;
+        }
+
+        & when (@direction = vertical) {
+            margin-top: @space * @i;
+            margin-bottom: @space * @i;
+        }
+
+        & when (@direction = left) {
+            margin-left: @space * @i;
+        }
+
+        & when (@direction = right) {
+            margin-right: @space * @i;
+        }
+
+        & when (@direction = horizontal) {
+            margin-right: @space * @i;
+            margin-left: @space * @i;
+        }
+    }
+}
+
+.space {
+    .generate-space(all);
+    .generate-space(top);
+    .generate-space(bottom);
+    .generate-space(vertical);
+    .generate-space(left);
+    .generate-space(right);
+    .generate-space(horizontal);
+
+    &_auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

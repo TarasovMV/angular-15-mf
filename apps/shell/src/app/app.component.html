@@ -1,9 +1,8 @@
-<ul class="remote-menu">
-	<li><a routerLink="/">Home</a></li>
-	<li><a routerLink="mfe1">Mfe1</a></li>
-	<li><a routerLink="mfe2">Mfe2</a></li>
-	<li><a routerLink="lazy/mfe1">Mfe1 Lazy</a></li>
-	<li><a routerLink="lazy/mfe2">Mfe2 Lazy</a></li>
-	<li><a routerLink="lazy/not-found">Lazy not found</a></li>
+<ul class="menu">
+    <ng-container *ngFor="let link of links">
+        <li><a [class.active]="(activeLink$ | async) === link.href" [routerLink]="link.href">{{link.label}}</a></li>
+    </ng-container>
 </ul>
-<router-outlet></router-outlet>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

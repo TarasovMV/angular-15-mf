@@ -15,9 +15,11 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
 	standalone: true,
 	template: `
-		<h1>Programmatic Loading</h1>
+		<h2>Programmatic Loading</h2>
 		<div>
-			<button (click)="load()">Load!</button>
+			<button class="custom-btn btn-16 space_top-2" (click)="load()">
+				Load!
+			</button>
 		</div>
 		<div #vcRef></div>
 	`,
