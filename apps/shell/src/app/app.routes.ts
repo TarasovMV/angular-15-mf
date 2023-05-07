@@ -8,7 +8,7 @@ export const appRoutes: Route[] = [
 			import('./components/home.component').then((c) => c.HomeComponent),
 	},
 	{
-		path: 'lazy/:app',
+		path: 'lazy',
 		loadComponent: () =>
 			import('./components/lazy-wrapper.component').then(
 				(c) => c.LazyWrapperComponent

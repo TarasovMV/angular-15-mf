@@ -3,7 +3,8 @@ body {
     --color-white: #e0e5ec;
     --radius: .25rem;
 
-    font-family: 'Arial', serif;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
     color: var(--color-black);
 }
 
@@ -25,35 +26,45 @@ button {
     position: relative;
     display: inline-block;
     border-radius: var(--radius);
+
+    background: var(--color-black);;
+    color: white;
+    z-index: 1;
+
+    &:after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        direction: rtl;
+        z-index: -1;
+        background: var(--color-white);
+        transition: all 0.3s ease;
+    }
+
+    &:hover {
+        color: var(--color-black);
+    }
+
+    &:hover:after {
+        left: auto;
+        right: 0;
+        width: 100%;
+    }
+
+    &:active {
+        top: 2px;
+    }
 }
 
-.btn-16 {
-    background: var(--color-black);;
-    color: #fff;
-    z-index: 1;
-}
-.btn-16:after {
-    position: absolute;
-    content: "";
-    width: 0;
-    height: 100%;
-    top: 0;
-    left: 0;
-    direction: rtl;
-    z-index: -1;
-    background: #e0e5ec;
-    transition: all 0.3s ease;
-}
-.btn-16:hover {
-    color: var(--color-black);
-}
-.btn-16:hover:after {
-    left: auto;
-    right: 0;
-    width: 100%;
-}
-.btn-16:active {
-    top: 2px;
+.remote {
+    min-height: 256px;
+    padding: .25rem;
+    background: white;
+    border: dashed 2px var(--color-black);
+    border-radius: var(--radius);
 }
 
 @sizes: 16;
@@ -107,5 +118,13 @@ button {
     &_auto {
         margin-left: auto;
         margin-right: auto;
+    }
+
+    &_auto-right {
+        margin-right: auto;
+    }
+
+    &_auto-left {
+        margin-left: auto;
     }
 }

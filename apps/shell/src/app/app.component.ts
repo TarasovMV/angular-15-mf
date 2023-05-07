@@ -17,12 +17,14 @@ export class AppComponent {
 
 	readonly links = [
 		{ href: '/', label: 'Home' },
-		{ href: '/mfe1', label: 'Mfe1' },
-		{ href: '/mfe2', label: 'Mfe2' },
-		{ href: '/lazy/mfe1', label: 'Mfe1 Lazy' },
-		{ href: '/lazy/mfe2', label: 'Mfe2 Lazy' },
-		{ href: '/lazy/not-found', label: 'Lazy not found' },
+		{ href: '/mfe1', label: 'App 1' },
+		{ href: '/mfe2', label: 'App 2' },
+		{ href: '/lazy', label: 'Lazy' },
 	] as const;
 
 	constructor(private readonly router: Router) {}
+
+    open(link: string): void {
+        window.open(link);
+    }
 }

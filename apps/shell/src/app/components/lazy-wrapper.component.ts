@@ -2,64 +2,55 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	createNgModule,
-	OnDestroy,
 	Type,
 	ViewChild,
 	ViewContainerRef,
 } from '@angular/core';
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { ActivatedRoute } from '@angular/router';
 import { MfeManifest } from '../../utils/load-mfe-manifest.util';
-import { Subject, takeUntil } from 'rxjs';
 
 @Component({
 	standalone: true,
 	template: `
-		<h2>Programmatic Loading</h2>
-		<div>
-			<button class="custom-btn btn-16 space_top-2" (click)="load()">
-				Load!
+		<h3>Script loading</h3>
+		<div class="space_top-2 space_bottom-4">
+			<button class="custom-btn" (click)="load('mfe1')">
+				Load App 1
 			</button>
+            <button class="custom-btn space_left-2" (click)="load('mfe2')">
+                Load App 2
+            </button>
 		</div>
 		<div #vcRef></div>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LazyWrapperComponent implements OnDestroy {
+export class LazyWrapperComponent {
 	@ViewChild('vcRef', { read: ViewContainerRef }) vcRef!: ViewContainerRef;
-	private app = '';
-	private readonly destroy$ = new Subject<void>();
 
-	constructor(route: ActivatedRoute) {
-		route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-			this.vcRef?.clear();
-			this.app = params.get('app') ?? '';
-		});
-	}
+	async load(app: string) {
+        this.vcRef?.clear();
 
-	ngOnDestroy(): void {
-		this.destroy$.next();
-		this.destroy$.complete();
-	}
-
-	async load() {
-		if (MfeManifest.checkApp(this.app)) {
-			const m = await loadRemoteModule(MfeManifest.getOptions(this.app));
-			const entity = m[MfeManifest.getEntity(this.app)];
-
-			const component =
-				MfeManifest.getType(this.app) === 'component'
-					? entity
-					: createNgModule<{ rootComponent: Type<unknown> }>(entity)
-							.instance.rootComponent;
-
-			this.vcRef.createComponent(component);
-
+		if (!MfeManifest.checkApp(app)) {
 			return;
 		}
 
-		const component = (await import('./not-found.component'))
-			.NotFoundComponent;
-		this.vcRef.createComponent(component);
+        try {
+            const m = await loadRemoteModule(MfeManifest.getOptions(app));
+            const entity = m[MfeManifest.getEntity(app)];
+
+            const component =
+                MfeManifest.getType(app) === 'component'
+                    ? entity
+                    : createNgModule<{ rootComponent: Type<unknown> }>(entity)
+                        .instance.rootComponent;
+
+            this.vcRef.createComponent(component);
+        } catch {
+            const component = (await import('./not-found.component'))
+                .NotFoundComponent;
+            this.vcRef.createComponent(component);
+        }
+
 	}
 }
