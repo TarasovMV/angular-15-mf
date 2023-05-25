@@ -17,9 +17,9 @@ import { MfeManifest } from '../../utils/load-mfe-manifest.util';
 			<button class="custom-btn" (click)="load('mfe1')">
 				Load App 1
 			</button>
-            <button class="custom-btn space_left-2" (click)="load('mfe2')">
-                Load App 2
-            </button>
+			<button class="custom-btn space_left-2" (click)="load('mfe2')">
+				Load App 2
+			</button>
 		</div>
 		<div #vcRef></div>
 	`,
@@ -29,28 +29,27 @@ export class LazyWrapperComponent {
 	@ViewChild('vcRef', { read: ViewContainerRef }) vcRef!: ViewContainerRef;
 
 	async load(app: string) {
-        this.vcRef?.clear();
+		this.vcRef?.clear();
 
 		if (!MfeManifest.checkApp(app)) {
 			return;
 		}
 
-        try {
-            const m = await loadRemoteModule(MfeManifest.getOptions(app));
-            const entity = m[MfeManifest.getEntity(app)];
+		try {
+			const m = await loadRemoteModule(MfeManifest.getOptions(app));
+			const entity = m[MfeManifest.getEntity(app)];
 
-            const component =
-                MfeManifest.getType(app) === 'component'
-                    ? entity
-                    : createNgModule<{ rootComponent: Type<unknown> }>(entity)
-                        .instance.rootComponent;
+			const component =
+				MfeManifest.getType(app) === 'component'
+					? entity
+					: createNgModule<{ rootComponent: Type<unknown> }>(entity)
+							.instance.rootComponent;
 
-            this.vcRef.createComponent(component);
-        } catch {
-            const component = (await import('./not-found.component'))
-                .NotFoundComponent;
-            this.vcRef.createComponent(component);
-        }
-
+			this.vcRef.createComponent(component);
+		} catch {
+			const component = (await import('./not-found.component'))
+				.NotFoundComponent;
+			this.vcRef.createComponent(component);
+		}
 	}
 }
