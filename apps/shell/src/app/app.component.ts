@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, shareReplay } from 'rxjs';
+import { COUNTER_TOKEN } from '@angular15mf/core';
+import { CounterBase } from '@angular15mf/models';
+import {
+	CounterNotSharedService,
+	CounterRxStoreService,
+} from '@angular15mf/common';
 
 @Component({
 	selector: 'angular15mf-root',
@@ -22,9 +28,20 @@ export class AppComponent {
 		{ href: '/lazy', label: 'Lazy' },
 	] as const;
 
-	constructor(private readonly router: Router) {}
+	constructor(
+		@Inject(COUNTER_TOKEN) counterTokenService: CounterBase,
+		counterNotSharedService: CounterNotSharedService,
+		counterRxService: CounterRxStoreService,
+		private readonly router: Router
+	) {
+		setInterval(() => {
+			counterTokenService.increase();
+			counterNotSharedService.increase();
+			counterRxService.increase();
+		}, 1000);
+	}
 
-    open(link: string): void {
-        window.open(link);
-    }
+	open(link: string): void {
+		window.open(link);
+	}
 }

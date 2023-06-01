@@ -69,8 +69,8 @@
 			"options": {
 				"port": 4200,
 				"publicHost": "http://localhost:4200",
-                "proxyConfig": "proxy.conf.js"
-            }
+				"proxyConfig": "proxy.conf.js"
+			}
 		},
 		"extract-i18n": {
 			"executor": "@angular-devkit/build-angular:extract-i18n",

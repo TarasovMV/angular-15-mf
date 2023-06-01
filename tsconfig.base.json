@@ -15,6 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@angular15mf/common": ["libs/common/src/index.ts"],
 			"@angular15mf/core": ["libs/core/src/index.ts"],
 			"@angular15mf/models": ["libs/models/src/index.ts"],
 			"@angular15mf/rx-store": ["libs/rx-store/src/index.ts"]
