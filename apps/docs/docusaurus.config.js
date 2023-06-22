@@ -9,7 +9,7 @@ const config = {
 	title: 'Angular Mfe Docs',
 	tagline: 'Документация по использованию Module Federation в Angular',
 	url: 'https://mf-demo.m-tarasov.com',
-	baseUrl: '/docs/',
+	baseUrl: '/tutorial/',
 	onBrokenLinks: 'throw',
 	onBrokenMarkdownLinks: 'warn',
 	favicon: 'img/favicon.ico',
@@ -24,8 +24,7 @@ const config = {
 				docs: {
 					sidebarPath: require.resolve('./sidebars.js'),
 					// Please change this to your repo.
-					editUrl:
-						'https://github.com/TarasovMV/angular-15-mf',
+					editUrl: 'https://github.com/TarasovMV/angular-15-mf',
 				},
 				theme: {
 					customCss: require.resolve('./src/css/custom.css'),
