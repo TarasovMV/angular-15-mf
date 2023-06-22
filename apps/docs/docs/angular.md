@@ -100,37 +100,41 @@ sidebar_position: 4
     ```
 
 ## Как настроить Module Federation для обмена модулями между приложениями
+
 Для того чтобы переиспользовать общие зависимости необходимо
 в файлах конфигурации webpack указать следующие параметры:
 
 - Если необходимо расшарить все зависимости:
+
 ```javascript
-const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+const {shareAll, withModuleFederationPlugin} = require('@angular-architects/module-federation/webpack');
 
 module.exports = withModuleFederationPlugin({
     // ...
     shared: {
-        ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+        ...shareAll({singleton: true, strictVersion: true, requiredVersion: 'auto'}),
     },
 });
 ```
 
 - Если необходимо расшарить только указанные зависимости:
+
 ```javascript
-const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+const {shareAll, withModuleFederationPlugin} = require('@angular-architects/module-federation/webpack');
 
 module.exports = withModuleFederationPlugin({
     // ...
     shared: share({
-        "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-        "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-        "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-        "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/core": {singleton: true, strictVersion: true, requiredVersion: 'auto'},
+        "@angular/common": {singleton: true, strictVersion: true, requiredVersion: 'auto'},
+        "@angular/common/http": {singleton: true, strictVersion: true, requiredVersion: 'auto'},
+        "@angular/router": {singleton: true, strictVersion: true, requiredVersion: 'auto'},
     }),
 });
 ```
 
 - Если необходимо расшарить внутренние библиотеки (например, при работе в nx монорепозитории):
+
 ```javascript
 const {
     withModuleFederationPlugin,
@@ -161,9 +165,10 @@ module.exports = (name, exposes = undefined) =>
 из пакета `@angular-architects/module-federation` (уже применялся в примерах выше).
 
 Данный метод в качестве аргумента принимает следующие параметры:
+
 - remoteEntry - путь до удаленного модуля/компонента
 - type - тип загружаемого модуля, по умолчанию - `module` (для загрузки необходимо указать remoteEntry),
-так же можно указать `manifest`, если используется стандартная конфигурация через файл манифеста
+  так же можно указать `manifest`, если используется стандартная конфигурация через файл манифеста
 - exposedModule - значение, указываемое в загружаемом приложении в качестве экспортируемого модуля/компонента
 
 

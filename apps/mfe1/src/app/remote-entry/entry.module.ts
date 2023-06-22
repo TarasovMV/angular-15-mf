@@ -7,8 +7,12 @@ import { RemoteEntryComponent } from './entry.component';
 import { remoteRoutes } from './entry.routes';
 
 @NgModule({
-	declarations: [RemoteEntryComponent, CounterInfoComponent],
-	imports: [CommonModule, RouterModule.forChild(remoteRoutes)],
+	declarations: [RemoteEntryComponent],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(remoteRoutes),
+		CounterInfoComponent,
+	],
 	providers: [],
 })
 export class RemoteEntryModule {

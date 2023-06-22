@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { COUNTER_TOKEN } from '@angular15mf/core';
+import { COUNTER_TOKEN, CounterSharedService } from '@angular15mf/core';
 import { CounterBase } from '@angular15mf/models';
 import {
 	CounterNotSharedService,
@@ -11,9 +11,10 @@ import {
 	template: `<div class="remote">
 		<h3>MFE-1</h3>
 		<angular15mf-counter-info
-			[token]="counterTokenService.counter$ | async"
-			[notShared]="counterNotSharedService.counter$ | async"
-			[rxStore]="counterRxStoreService.counter$ | async"
+			[core]="counterSharedService"
+			[token]="counterTokenService"
+			[notShared]="counterNotSharedService"
+			[rxStore]="counterRxStoreService"
 		></angular15mf-counter-info>
 	</div>`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +22,7 @@ import {
 export class RemoteEntryComponent {
 	constructor(
 		@Inject(COUNTER_TOKEN) readonly counterTokenService: CounterBase,
+		readonly counterSharedService: CounterSharedService,
 		readonly counterNotSharedService: CounterNotSharedService,
 		readonly counterRxStoreService: CounterRxStoreService
 	) {}
