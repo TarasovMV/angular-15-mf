@@ -9,7 +9,7 @@ import {
 @Component({
 	selector: 'angular15mf-mfe1-entry',
 	template: `<div class="remote">
-		<h3>MFE-1</h3>
+		<h3>MFE-12323</h3>
 		<angular15mf-counter-info
 			[core]="counterSharedService"
 			[token]="counterTokenService"

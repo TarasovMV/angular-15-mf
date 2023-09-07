@@ -130,3 +130,5 @@ loadRemoteModule({
 
 Стоит отметить, что данное решение не является целевым и вызовет размеры с итоговым размером бандла, загружаемого
 пользователем
+
+https://www.angulararchitects.io/aktuelles/multi-framework-and-version-micro-frontends-with-module-federation-your-4-steps-guide/

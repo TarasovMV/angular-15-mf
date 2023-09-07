@@ -89,6 +89,14 @@ export class RxStoreService<T> implements RxStore<T> {
 	}
 
 	/**
+	 * @description Return true if key is existed
+	 * @param key key of get field
+	 */
+	has<Key extends keyof T>(key: Key): boolean {
+		return Object.keys(this.storeSnapshot).includes(key as string);
+	}
+
+	/**
 	 * @description To clear whole store
 	 */
 	clear(): void {

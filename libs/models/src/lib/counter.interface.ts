@@ -1,7 +1,7 @@
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface CounterBase {
-	counter$: BehaviorSubject<number>;
+	counter$: Observable<number>;
 	increase: () => void;
 	decrease: () => void;
 }

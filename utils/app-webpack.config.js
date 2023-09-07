@@ -5,7 +5,7 @@ const {
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const path = require('path');
 
-const SHARED_LIBS = ['@angular15mf/core', '@angular15mf/rx-store'];
+const SHARED_LIBS = ['@angular15mf/core'];
 
 const sharedMappings = new SharedMappings();
 sharedMappings.register(

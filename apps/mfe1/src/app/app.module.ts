@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { APP_STORE, COUNTER_TOKEN } from '@angular15mf/core';
-import { CounterNotSharedService } from '@angular15mf/common';
-import { RxStoreService } from '@angular15mf/rx-store';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -22,16 +19,6 @@ import { RxStoreService } from '@angular15mf/rx-store';
 			],
 			{ initialNavigation: 'enabledBlocking' }
 		),
-	],
-	providers: [
-		{
-			provide: COUNTER_TOKEN,
-			useClass: CounterNotSharedService,
-		},
-		{
-			provide: APP_STORE,
-			useClass: RxStoreService,
-		},
 	],
 	bootstrap: [AppComponent],
 })
